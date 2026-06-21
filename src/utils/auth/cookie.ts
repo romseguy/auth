@@ -1,7 +1,7 @@
-import { serialize } from "cookie";
+import { Cookies, serialize } from "cookie";
 import { NextApiResponse } from "next";
 import * as Iron from "@hapi/iron";
-const { getEnv } = require("utils/env");
+import { getEnv } from "utils/env";
 
 export const TOKEN_NAME = "api_token";
 const MAX_AGE = 60 * 60 * 24 * 7;
@@ -23,7 +23,7 @@ export function createCookie(name: string, data: string, options = {}) {
   });
 }
 
-export function getAuthToken(cookies?: Record<string, string>) {
+export function getAuthToken(cookies?: Cookies) {
   if (!cookies) return "";
   return cookies[TOKEN_NAME];
 }

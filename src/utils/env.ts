@@ -1,10 +1,32 @@
+import { Magic } from "magic-sdk";
+import { OAuthExtension } from "@magic-ext/oauth";
+import { isServer } from "./isServer";
+
 export function getEnv() {
   return process.env.ENV || process.env.NODE_ENV;
 }
 
+export const magic = isServer()
+  ? null
+  : new Magic("pk_live_A29F9FA3034AA1AB", {
+      extensions: [new OAuthExtension()],
+      locale: "fr"
+    });
+
 if (getEnv() !== "production") {
   const originalError = console.error;
   const originalWarning = console.warn;
+  const originalInfo = console.info;
+  console.info = (...args) => {
+    if (typeof args[0] !== "string") return;
+    if (
+      args[0].includes("The object notation")
+      //||
+    ) {
+      return;
+    }
+    originalInfo(...args);
+  };
   console.warn = (...args) => {
     if (typeof args[0] !== "string") return;
     if (
@@ -22,6 +44,7 @@ if (getEnv() !== "production") {
       args[0].includes(
         "Support for defaultProps will be removed from function components in a future major release."
       )
+      //|| args[0].includes("React 17")
     ) {
       return;
     }
