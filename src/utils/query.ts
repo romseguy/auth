@@ -10,11 +10,9 @@ export function objectToQueryString(obj: { [key: string]: string } | {}) {
 
   return keys
     .filter((key) => {
-      //@ts-expect-error
       return typeof obj[key] !== "undefined";
     })
     .map((key) => {
-      //@ts-expect-error
       return `${key}=${obj[key]}`;
     })
     .join("&");
