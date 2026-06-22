@@ -11,22 +11,25 @@ const initialState: UserState = { userEmail: "" };
 export const userSlice = createSlice({
   name: "user",
   initialState,
+
   reducers: {
     resetUserEmail: (state) => {
       state.userEmail = initialState.userEmail;
     },
+
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.userEmail = action.payload;
-    }
+    },
   },
+
   extraReducers: {
     [HYDRATE]: (state, action) => {
       return {
         ...state,
-        ...action.payload.user
+        ...action.payload.user,
       };
-    }
-  }
+    },
+  },
 });
 
 export const { resetUserEmail, setUserEmail } = userSlice.actions;

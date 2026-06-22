@@ -14,6 +14,6 @@ export const useSession = () => {
     data: session,
     loading: isSessionLoading,
     setSession,
-    setIsSessionLoading
+    setIsSessionLoading,
   };
 };

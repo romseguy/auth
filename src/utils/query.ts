@@ -1,6 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { selectSession } from "store/sessionSlice";
-import { TOKEN_NAME } from "./auth";
+import { TOKEN_NAME } from "./auth/cookie";
 import { isServer } from "./isServer";
 
 export function objectToQueryString(obj: { [key: string]: string } | {}) {
@@ -20,6 +20,7 @@ export function objectToQueryString(obj: { [key: string]: string } | {}) {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API,
+
   // credentials: "include",
   // mode: "cors",
   prepareHeaders: (headers, { getState, extra, endpoint, forced, type }) => {
@@ -35,7 +36,7 @@ const baseQuery = fetchBaseQuery({
       }
     }
     return headers;
-  }
+  },
 });
 
 export default baseQuery;

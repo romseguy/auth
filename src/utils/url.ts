@@ -18,5 +18,5 @@ export const unauthorizedEntityUrls = [
   "p",
   "privacy",
   "sandbox",
-  "sent"
+  "sent",
 ];

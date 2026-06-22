@@ -10,14 +10,14 @@ export type ResponseType<T> = { data?: T; error?: any; status?: number };
 
 const agent = new https.Agent({
   rejectUnauthorized: false,
-  requestCert: false
+  requestCert: false,
 });
 
 export const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API2,
   responseType: "json",
   withCredentials: true,
-  httpsAgent: agent
+  httpsAgent: agent,
 });
 
 async function request(
@@ -40,9 +40,10 @@ async function request(
       body?: BodyInit;
     } = {
       method,
+
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
 
     if (params)
@@ -124,20 +125,22 @@ export async function sendPushNotification({
     process.env.NEXT_PUBLIC_API + "/notification",
     {
       subscription,
+
       notification: {
         title,
         message,
+
         url: url.includes("http")
           ? url
-          : `${process.env.NEXT_PUBLIC_URL}/${url}`
-      }
+          : `${process.env.NEXT_PUBLIC_URL}/${url}`,
+      },
     },
     {
       headers: {
         Accept: "application/json, text/plain, */*",
-        "User-Agent": "*"
-      }
-    }
+        "User-Agent": "*",
+      },
+    },
   );
 }
 
@@ -147,5 +150,5 @@ export default {
   post,
   update,
   remove,
-  sendPushNotification
+  sendPushNotification,
 };

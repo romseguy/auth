@@ -10,6 +10,7 @@
     "compile:w": "tsc --build --watch"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "1",
     "@eaboy/clean-console": "^1.0.4",
     "@emotion/react": "^11",
@@ -25,6 +26,7 @@
     "next-connect": "^1.0.0",
     "next-redux-wrapper": "^8.1.0",
     "react": "18",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18",
     "react-error-boundary": "^6.1.2",
     "react-redux": "^9.3.0",

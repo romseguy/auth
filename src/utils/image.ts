@@ -28,7 +28,7 @@ export const getBase64 = (file: File): Promise<Base64Image> =>
             resolve({
               base64: reader.result,
               height: img.height,
-              width: img.width
+              width: img.width,
             });
         };
       } else reject("invalid type");

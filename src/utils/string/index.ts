@@ -61,10 +61,13 @@ export function logJson(message: string, object?: any) {
 
 export function sanitize(str?: string) {
   if (!str) return "";
-  return DOMPurify.sanitize(str, {
-    ADD_ATTR: ["target"],
-    ADD_TAGS: ["iframe"]
-  });
+  return DOMPurify.sanitize(
+    str,
+    {
+      ADD_ATTR: ["target"],
+      ADD_TAGS: ["iframe"],
+    },
+  );
 }
 
 export function toLowerCase(str?: string) {

@@ -39,10 +39,13 @@ function AppStateProvider({
 }) {
   const [state, dispatch] = useReducer(appReducer, { isMobile });
 
-  return createElement(AppStateContext.Provider, {
-    children,
-    value: { state, dispatch }
-  });
+  return createElement(
+    AppStateContext.Provider,
+    {
+      children,
+      value: { state, dispatch },
+    },
+  );
 }
 
 const useAppState = () => {

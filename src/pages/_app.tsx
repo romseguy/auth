@@ -3,10 +3,15 @@ import { unseal } from "@hapi/iron";
 import { parse } from "cookie";
 import { theme } from "features/layout/theme";
 import { PageProps } from "main";
+import {
+  getSelectorsByUserAgent,
+  isMobile as rddIsMobile,
+} from "react-device-detect";
 import { wrapper } from "store";
-import { setSession } from "store/sessionSlice";
+import { setIsSessionLoading, setSession } from "store/sessionSlice";
 import { setIsMobile } from "store/uiSlice";
-import { getAuthToken, sealOptions, Session, TOKEN_NAME } from "utils/auth";
+import { getAuthToken, sealOptions, TOKEN_NAME } from "utils/auth/cookie";
+import { isServer } from "utils/isServer";
 
 const App = wrapper.withRedux(({ Component, cookies, pageProps, ...props }) => {
   return (
@@ -24,7 +29,14 @@ App.getInitialProps = wrapper.getInitialAppProps(
     async ({ Component, ctx }) => {
       const headers = ctx.req?.headers;
       console.log("🚀 ~ headers:", headers);
-      const isMobile = true;
+      let userAgent = headers?.["user-agent"];
+      if (!isServer()) {
+        if (!userAgent) userAgent = navigator.userAgent;
+      }
+      const isMobile =
+        typeof userAgent === "string"
+          ? getSelectorsByUserAgent(userAgent).isMobile
+          : rddIsMobile;
       store.dispatch(setIsMobile(isMobile));
 
       const cookies = headers?.cookie;
@@ -47,9 +59,9 @@ App.getInitialProps = wrapper.getInitialAppProps(
 
             session = {
               user: {
-                ...user
                 //isAdmin
-              }
+                ...user,
+              },
             };
           }
         }
@@ -63,11 +75,11 @@ App.getInitialProps = wrapper.getInitialAppProps(
       if (Component.getInitialProps)
         pageProps = {
           ...pageProps,
-          ...(await Component.getInitialProps(ctx))
+          ...(await Component.getInitialProps(ctx)),
         };
 
       return { cookies, pageProps };
-    }
+    },
 );
 
 export default App;

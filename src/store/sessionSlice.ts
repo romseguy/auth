@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { AppState } from "store";
-import { Session } from "utils/auth";
 
 const initialState: {
   isOffline: boolean;
@@ -10,31 +9,35 @@ const initialState: {
 } = {
   isOffline: false,
   isSessionLoading: false,
-  session: null
+  session: null,
 };
 
 export const sessionSlice = createSlice({
   name: "session",
   initialState,
+
   reducers: {
     setIsOffline: (state, action: PayloadAction<boolean>) => {
       state.isOffline = action.payload;
     },
+
     setIsSessionLoading: (state, action: PayloadAction<boolean>) => {
       state.isSessionLoading = action.payload;
     },
+
     setSession: (state, action: PayloadAction<Session | null>) => {
       state.session = action.payload;
-    }
+    },
   },
+
   extraReducers: {
     [HYDRATE]: (state, action) => {
       return {
         ...state,
-        ...action.payload.session
+        ...action.payload.session,
       };
-    }
-  }
+    },
+  },
 });
 
 export const { setIsOffline, setIsSessionLoading, setSession } =

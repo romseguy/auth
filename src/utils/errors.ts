@@ -8,7 +8,7 @@ export interface ServerError {
 }
 
 export const databaseErrorCodes = {
-  DUPLICATE_KEY: 11000
+  DUPLICATE_KEY: 11000,
 };
 
 type DuplicateError = Error & { code?: number; field?: string };
@@ -31,8 +31,8 @@ export const databaseErrorMessages: { [key: number]: any } = {
     email: "Cette adresse e-mail n'est pas disponible",
     orgUrl: "Ce nom d'organisation n'est pas disponible",
     eventUrl: "Ce nom d'événement n'est pas disponible",
-    userName: "Ce nom d'utilisateur n'est pas disponible"
-  }
+    userName: "Ce nom d'utilisateur n'est pas disponible",
+  },
 };
 
 const createDatabaseError = (error: any) => {
@@ -40,19 +40,19 @@ const createDatabaseError = (error: any) => {
   const message = databaseErrorMessages[error.code][fieldName];
 
   return {
-    message: message + "."
+    message: message + ".",
   };
 };
 
 const serverErrorMessages: { [key: string]: any } = {
-  ECONNREFUSED: "Veuillez vérifier votre connexion internet"
+  ECONNREFUSED: "Veuillez vérifier votre connexion internet",
 };
 
 const createServerError = (error: any) => {
   const message = serverErrorMessages[error.code];
 
   return {
-    message: message + "."
+    message: message + ".",
   };
 };
 

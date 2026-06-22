@@ -39,7 +39,7 @@ export const days = [
   "jeudi",
   "vendredi",
   "samedi",
-  "dimanche"
+  "dimanche",
 ];
 
 var DAYS_IN_A_WEEK = 7;
@@ -94,7 +94,7 @@ export const formatArray = [
   "weeks",
   "days",
   "hours",
-  "minutes"
+  "minutes",
 ];
 
 const formatDistanceLocale = {
@@ -103,26 +103,34 @@ const formatDistanceLocale = {
   xHours: "{{count}}h",
   xDays: "{{count}}j",
   xMonths: "{{count}}M",
-  xYears: "{{count}}y"
+  xYears: "{{count}}y",
 } as { [key: string]: string };
 
 export const formatDuration = (
   duration: Duration,
   { format }: { format: string[] }
 ) => {
-  return oFormatDuration(duration, {
-    format,
-    locale: {
-      formatDistance: (token, count) =>
-        formatDistanceLocale[token].replace("{{count}}", count)
-    }
-  });
+  return oFormatDuration(
+    duration,
+    {
+      format,
+
+      locale: {
+        formatDistance: (token, count) =>
+          formatDistanceLocale[token].replace("{{count}}", count),
+      },
+    },
+  );
 };
 
 export const fullDateString = (date: Date) => {
-  return format(date, "eeee dd MMMM yyyy à H'h'mm", {
-    locale: fr
-  });
+  return format(
+    date,
+    "eeee dd MMMM yyyy à H'h'mm",
+    {
+      locale: fr,
+    },
+  );
 };
 
 export const timeAgo = (
@@ -139,7 +147,7 @@ export const timeAgo = (
   const fullDate = fullDateString(end);
   const duration = intervalToDuration({
     start: new Date(),
-    end
+    end,
   });
   const format2 = isShort
     ? (format || formatArray).filter((f) => {
@@ -155,9 +163,12 @@ export const timeAgo = (
       })
     : format || formatArray;
 
-  const formatted = formatDuration(duration, {
-    format: format2
-  });
+  const formatted = formatDuration(
+    duration,
+    {
+      format: format2,
+    },
+  );
 
   return { timeAgo: formatted === "" ? "1m" : formatted, fullDate };
 };

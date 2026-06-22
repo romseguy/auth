@@ -12,7 +12,7 @@ export interface LayoutProps {
 
 export const mainStyles = ({
   isDark,
-  isMobile
+  isMobile,
 }: {
   isDark: boolean;
   isMobile: boolean;
@@ -60,14 +60,6 @@ export const Layout = ({
     </Flex>
   );
 
-  const Fallback = ({
-    error,
-    resetErrorBoundary,
-    ...props
-  }: FallbackProps & { error: ServerError }) => {
-    return page(<>Une erreur est survenue,.</>);
-  };
-
   return (
     <>
       <Head>
@@ -76,7 +68,11 @@ export const Layout = ({
         {/* <title>{title}</title> */}
       </Head>
 
-      <ErrorBoundary fallbackRender={Fallback}>{page(children)}</ErrorBoundary>
+      <ErrorBoundary
+        fallbackRender={() => main("Error : open developer console")}
+      >
+        {page(children)}
+      </ErrorBoundary>
     </>
   );
 };

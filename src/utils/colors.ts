@@ -50,7 +50,7 @@ export function hexToRgb(color: string): ColorRGB {
   return {
     r,
     g,
-    b
+    b,
   };
 }
 
@@ -95,7 +95,7 @@ export function hsvToRgb(color: ColorHSV): ColorRGB {
   return {
     r,
     g,
-    b
+    b,
   };
 }
 
@@ -110,7 +110,7 @@ export function getRgb(color: string): ColorRGB {
   return {
     r,
     g,
-    b
+    b,
   };
 }
 
@@ -119,12 +119,12 @@ export function parseColor(color: string): Color {
   var rgb = {
     r: 0,
     g: 0,
-    b: 0
+    b: 0,
   };
   var hsv = {
     h: 0,
     s: 0,
-    v: 0
+    v: 0,
   };
 
   if (color.slice(0, 1) === "#") {
@@ -140,7 +140,7 @@ export function parseColor(color: string): Color {
   return {
     hex,
     rgb,
-    hsv
+    hsv,
   };
 }
 

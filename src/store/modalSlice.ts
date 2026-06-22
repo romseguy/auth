@@ -6,19 +6,20 @@ type ModalState = {
 };
 
 const initialState: ModalState = {
-  isContactModalOpen: false
+  isContactModalOpen: false,
 };
 
 export const modalSlice = createSlice({
   name: "modal",
   initialState,
+
   reducers: {
     setIsContactModalOpen: (state, action: PayloadAction<boolean>) => {
       if (!action.payload)
         state.isContactModalOpen = initialState.isContactModalOpen;
       state.isContactModalOpen = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setIsContactModalOpen } = modalSlice.actions;

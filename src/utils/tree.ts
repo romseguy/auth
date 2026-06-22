@@ -48,7 +48,7 @@ export default function map2tree<T>(
       for (let i = 0; i < value.length; i++) {
         newNode.children[pushMethod]({
           name: `${key}[${i}]`,
-          [isPlainObject(value[i]) ? "object" : "value"]: value[i]
+          [isPlainObject(value[i]) ? "object" : "value"]: value[i],
         });
       }
     } else if (isPlainObject(value)) {
