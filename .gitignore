@@ -21,6 +21,7 @@ tsconfig.tsbuildinfo
 **/public/workbox-*.js.map
 
 # misc
+*.json
 *.zip
 *.tar.gz
 *.mongodb.js

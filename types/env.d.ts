@@ -17,8 +17,9 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       ENV: "development" | "production" | "test";
-      NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY: string;
+      DATABASE_URL: string;
       SECRET: string | Password | Password.Hash;
+      NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY: string;
     }
   }
 }
